@@ -19,8 +19,8 @@ A simple RESTful API built with Express.js, TypeScript, and pnpm.
 ### 1️⃣ Clone the repo
 
 ```bash
-git clone <your-repo-url>
-cd express-ts-api
+git clone https://github.com/plmtmbnn/express-ts-personal-api
+cd express-ts-personal-api
 ```
 
 ### 2️⃣ Install dependencies
