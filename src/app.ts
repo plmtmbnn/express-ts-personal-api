@@ -2,7 +2,7 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import routes from './routes'; // Make sure this exports an Express Router
 
-export const app: Application = express();
+const app: Application = express();
 
 // ✅ Middlewares
 app.use(cors());
@@ -42,3 +42,5 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     message: err?.message || 'Unexpected error occurred'
   });
 });
+
+export default app; // ✅ Default export now
