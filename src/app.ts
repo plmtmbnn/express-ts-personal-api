@@ -5,7 +5,7 @@ import express, {
 	type Request,
 	type Response,
 } from "express";
-import routes from "./routes"; // Make sure this exports an Express Router
+import routes from "./routes";
 
 const app: Application = express();
 
