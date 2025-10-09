@@ -10,12 +10,18 @@
 		"lint": "biome lint .",
 		"format": "biome format --write .",
 		"prepare": "husky",
-		"release": "semantic-release"
+		"release": "semantic-release",
+		"commit": "cz"
 	},
 	"lint-staged": {
 		"*.{js,ts,json}": [
 			"biome check --write"
 		]
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
 	},
 	"keywords": [],
 	"author": "",
@@ -37,14 +43,22 @@
 		"@types/cors": "^2.8.19",
 		"@types/express": "^5.0.3",
 		"@types/node": "^24.0.1",
+		"commitizen": "^4.3.1",
+		"cz-conventional-changelog": "^3.3.0",
 		"husky": "^9.1.7",
 		"lint-staged": "^16.2.3",
 		"semantic-release": "^24.2.9",
+		"standard-version": "^9.5.0",
 		"ts-node-dev": "^2.0.0",
 		"typescript": "^5.8.3"
 	},
 	"engines": {
 		"node": "20.x"
 	},
-	"engineStrict": true
+	"engineStrict": true,
+	"config": {
+		"commitizen": {
+			"path": "cz-conventional-changelog"
+		}
+	}
 }
