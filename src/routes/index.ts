@@ -1,10 +1,10 @@
-import { Router } from 'express';
-import { helloRouter } from './hello.routes';
+import { Router } from "express";
+import { helloRouter } from "./hello.routes";
 
 const router = Router();
 
 // Register all routes here
-router.use('/hello', helloRouter);
+router.use("/hello", helloRouter);
 
 // Add more routers below if needed
 // router.use('/users', userRouter);
