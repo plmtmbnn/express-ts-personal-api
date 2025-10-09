@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 // ✅ API Routes (ensure routes is a Router)
 app.use("/api", routes);
 
-// ✅ Root health endpoint
+// ✅ health endpoint
 app.get(["/", "/health", "/ping"], (req: Request, res: Response) => {
 	res.status(200).json({
 		status: "up",
@@ -25,7 +25,6 @@ app.get(["/", "/health", "/ping"], (req: Request, res: Response) => {
 		details: {
 			method: req.method,
 			path: req.originalUrl,
-
 			ipAddress: req.headers["x-forwarded-for"] || req.socket.remoteAddress,
 			userAgent: req.headers["user-agent"],
 		},
