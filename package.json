@@ -9,7 +9,8 @@
 		"start": "node dist/index.js",
 		"lint": "biome lint .",
 		"format": "biome format --write .",
-		"prepare": "husky init"
+		"prepare": "husky init",
+		"release": "semantic-release"
 	},
 	"lint-staged": {
 		"*.{js,ts,json}": [
@@ -27,11 +28,18 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.2.5",
+		"@commitlint/cli": "^20.1.0",
+		"@commitlint/config-conventional": "^20.0.0",
+		"@semantic-release/changelog": "^6.0.3",
+		"@semantic-release/commit-analyzer": "^13.0.1",
+		"@semantic-release/git": "^10.0.1",
+		"@semantic-release/release-notes-generator": "^14.1.0",
 		"@types/cors": "^2.8.19",
 		"@types/express": "^5.0.3",
 		"@types/node": "^24.0.1",
 		"husky": "^9.1.7",
 		"lint-staged": "^16.2.3",
+		"semantic-release": "^24.2.9",
 		"ts-node-dev": "^2.0.0",
 		"typescript": "^5.8.3"
 	},
