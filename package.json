@@ -9,7 +9,7 @@
 		"start": "node dist/index.js",
 		"lint": "biome lint .",
 		"format": "biome format --write .",
-		"prepare": "husky init",
+		"prepare": "husky",
 		"release": "semantic-release"
 	},
 	"lint-staged": {
