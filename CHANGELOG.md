@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/plmtmbnn/express-ts-personal-api/compare/v1.1.0...v1.2.0) (2025-10-09)
+
+
+### Features
+
+* add logging middleware ([bede73d](https://github.com/plmtmbnn/express-ts-personal-api/commit/bede73de542ed780f221d067a842588fef9237d2))
+
 ## [1.1.0](https://github.com/plmtmbnn/express-ts-personal-api/compare/v0.1.0...v1.1.0) (2025-10-09)
 
 
