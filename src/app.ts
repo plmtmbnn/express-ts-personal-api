@@ -26,8 +26,8 @@ app.get(["/", "/health", "/ping"], (req: Request, res: Response) => {
 			method: req.method,
 			path: req.originalUrl,
 
-			ip_address: req.headers["x-forwarded-for"] || req.socket.remoteAddress,
-			user_agent: req.headers["user-agent"],
+			ipAddress: req.headers["x-forwarded-for"] || req.socket.remoteAddress,
+			userAgent: req.headers["user-agent"],
 		},
 	});
 });
