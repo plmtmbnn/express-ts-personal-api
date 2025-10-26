@@ -1,35 +1,42 @@
-# --- Stage 1: Build the app ---
+# ========== 1. Base image untuk build ==========
 FROM node:20-alpine AS builder
 
+# Set working directory
 WORKDIR /app
 
-# Copy package manager files first (better cache)
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Copy package files dulu (agar caching efisien)
 COPY package.json pnpm-lock.yaml ./
 
-# Install pnpm
-RUN npm install -g pnpm
-
-# Install dependencies
+# Install dependencies (pakai frozen-lockfile agar konsisten)
 RUN pnpm install --frozen-lockfile
 
-# Copy app source
+# Copy semua source code
 COPY . .
 
-# Build the TypeScript code
-RUN pnpm build
+# Build project TypeScript (hasil build ke /app/dist)
+RUN pnpm run build
 
 
-# --- Stage 2: Run the app ---
+# ========== 2. Base image untuk runtime ==========
 FROM node:20-alpine AS runner
 
 WORKDIR /app
 
-# Copy only built files + necessary runtime files
-COPY --from=builder /app/dist ./dist
+# Install pnpm di runtime
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Copy hanya file penting dari builder
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/pnpm-lock.yaml ./
 COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
 
+# Gunakan port environment atau default 3000
+ENV PORT=3000
 EXPOSE 3000
 
-CMD ["node", "dist/index.js"]
+# Jalankan aplikasi
+CMD ["pnpm", "start"]
