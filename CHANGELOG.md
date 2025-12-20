@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/plmtmbnn/express-ts-personal-api/compare/v1.2.0...v1.3.0) (2025-12-20)
+
+
+### Features
+
+* http handler implement using ofetch ([835891c](https://github.com/plmtmbnn/express-ts-personal-api/commit/835891c9d80b754d780215c82d5bac812dbef2b8))
+* http handler implement using ofetch ([f3a1aa3](https://github.com/plmtmbnn/express-ts-personal-api/commit/f3a1aa341cb13e26a8eca0cc648b6c30da69dcf6))
+* integrate redis, jwt and dotenv ([04a1606](https://github.com/plmtmbnn/express-ts-personal-api/commit/04a1606406509a993b5adf7e6e007cd8ef67ff86))
+
 ## [1.2.0](https://github.com/plmtmbnn/express-ts-personal-api/compare/v1.1.0...v1.2.0) (2025-10-09)
 
 
