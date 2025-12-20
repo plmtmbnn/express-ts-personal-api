@@ -1,9 +1,9 @@
-import type { Request, Response } from "express";
+import type { Request, Response } from 'express';
 
 export const getHello = (_req: Request, res: Response) => {
-	res.json({ message: "Hello Backend" });
+  res.json({ message: 'Hello Backend' });
 };
 
 export const postEcho = (req: Request, res: Response) => {
-	res.json({ youSent: req.body });
+  res.json({ youSent: req.body });
 };
