@@ -1,29 +1,13 @@
-import { httpClient } from './http.client';
-import type { BaseOptions } from './http.types';
+import { client } from './http.client';
+import { resolveHeaders } from './http.headers';
+import { type BaseOptions, HttpBody } from './http.types';
 
 const DEFAULT_TIMEOUT = 5000;
 
-type HttpBody =
-  | Record<string, any>
-  | Array<any>
-  | string
-  | number
-  | boolean
-  | null;
-
 export const http = {
   get<T>(url: string, options?: BaseOptions): Promise<T> {
-    return httpClient<T>(url, {
+    return client<T>(url, {
       method: 'GET',
-      query: options?.query,
-      headers: options?.headers,
-      timeout: options?.timeoutMs ?? DEFAULT_TIMEOUT,
-    });
-  },
-
-  delete<T>(url: string, options?: BaseOptions): Promise<T> {
-    return httpClient<T>(url, {
-      method: 'DELETE',
       query: options?.query,
       headers: options?.headers,
       timeout: options?.timeoutMs ?? DEFAULT_TIMEOUT,
@@ -35,21 +19,21 @@ export const http = {
     body: Body,
     options?: BaseOptions
   ): Promise<T> {
-    return httpClient<T>(url, {
+    return client<T>(url, {
       method: 'POST',
       body,
       query: options?.query,
-      headers: options?.headers,
+      headers: resolveHeaders(body, options?.headers),
       timeout: options?.timeoutMs ?? DEFAULT_TIMEOUT,
     });
   },
 
   put<T, HttpBody>(url: string, body: Body, options?: BaseOptions): Promise<T> {
-    return httpClient<T>(url, {
+    return client<T>(url, {
       method: 'PUT',
       body,
       query: options?.query,
-      headers: options?.headers,
+      headers: resolveHeaders(body, options?.headers),
       timeout: options?.timeoutMs ?? DEFAULT_TIMEOUT,
     });
   },
@@ -59,11 +43,11 @@ export const http = {
     body: Body,
     options?: BaseOptions
   ): Promise<T> {
-    return httpClient<T>(url, {
+    return client<T>(url, {
       method: 'PATCH',
       body,
       query: options?.query,
-      headers: options?.headers,
+      headers: resolveHeaders(body, options?.headers),
       timeout: options?.timeoutMs ?? DEFAULT_TIMEOUT,
     });
   },
