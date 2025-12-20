@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
-import redis from '../config/redis';
+import redis from '../libs/redis';
 
 export function rateLimit({
   keyPrefix,

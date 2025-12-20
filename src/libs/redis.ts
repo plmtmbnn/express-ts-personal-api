@@ -1,5 +1,5 @@
 import Redis from 'ioredis';
-import { ENV_GLOBAL } from '.';
+import { ENV_GLOBAL } from '../config';
 
 const redis = new Redis(ENV_GLOBAL.REDIS_ENDPOINT);
 
