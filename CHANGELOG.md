@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/plmtmbnn/express-ts-personal-api/compare/v1.3.0...v1.4.0) (2025-12-20)
+
+
+### Features
+
+* enhance http handler ([c4f4bb6](https://github.com/plmtmbnn/express-ts-personal-api/commit/c4f4bb6724766c42973cddc6e0529649dd43d203))
+
 ## [1.3.0](https://github.com/plmtmbnn/express-ts-personal-api/compare/v1.2.0...v1.3.0) (2025-12-20)
 
 

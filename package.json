@@ -1,6 +1,6 @@
 {
   "name": "express-ts-personal-api",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -67,5 +67,6 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
-  }
+  },
+  "type": "module"
 }
