@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import cors from 'cors';
 import express, {
   type Application,
@@ -5,6 +7,7 @@ import express, {
   type Request,
   type Response,
 } from 'express';
+import { traceIdMiddleware } from './middlewares/trace-id.middleware';
 import routes from './routes';
 
 const app: Application = express();
@@ -13,6 +16,7 @@ const app: Application = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(traceIdMiddleware);
 
 // ✅ API Routes (ensure routes is a Router)
 app.use('/api', routes);
