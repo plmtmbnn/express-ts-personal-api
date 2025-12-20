@@ -1,14 +1,12 @@
-import { FetchOptions, ofetch } from 'ofetch';
+import { ofetch } from 'ofetch';
 import { HttpClientError } from './http.error';
-
-const DEFAULT_TIMEOUT = 5000;
 
 export const httpClient = ofetch.create({
   retry: 0,
 
   async onRequest({ options }) {
+    options.headers.set('content-type', 'application/json');
     options.headers = {
-      'content-type': 'application/json',
       ...(options.headers || {}),
     };
   },

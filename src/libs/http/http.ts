@@ -3,6 +3,14 @@ import type { BaseOptions } from './http.types';
 
 const DEFAULT_TIMEOUT = 5000;
 
+type HttpBody =
+  | Record<string, any>
+  | Array<any>
+  | string
+  | number
+  | boolean
+  | null;
+
 export const http = {
   get<T>(url: string, options?: BaseOptions): Promise<T> {
     return httpClient<T>(url, {
@@ -22,7 +30,11 @@ export const http = {
     });
   },
 
-  post<T, Body>(url: string, body: Body, options?: BaseOptions): Promise<T> {
+  post<T, HttpBody>(
+    url: string,
+    body: Body,
+    options?: BaseOptions
+  ): Promise<T> {
     return httpClient<T>(url, {
       method: 'POST',
       body,
@@ -32,7 +44,7 @@ export const http = {
     });
   },
 
-  put<T, Body>(url: string, body: Body, options?: BaseOptions): Promise<T> {
+  put<T, HttpBody>(url: string, body: Body, options?: BaseOptions): Promise<T> {
     return httpClient<T>(url, {
       method: 'PUT',
       body,
@@ -42,7 +54,11 @@ export const http = {
     });
   },
 
-  patch<T, Body>(url: string, body: Body, options?: BaseOptions): Promise<T> {
+  patch<T, HttpBody>(
+    url: string,
+    body: Body,
+    options?: BaseOptions
+  ): Promise<T> {
     return httpClient<T>(url, {
       method: 'PATCH',
       body,

@@ -3,6 +3,7 @@ import 'dotenv/config';
 import cors from 'cors';
 import express, {
   type Application,
+  type ErrorRequestHandler,
   type NextFunction,
   type Request,
   type Response,
@@ -44,12 +45,19 @@ app.use((req: Request, res: Response) => {
 });
 
 // ✅ Global error handler
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  console.error('[Express Error]', err);
-  res.status(500).json({
-    error: 'Internal Server Error',
-    message: err?.message || 'Unexpected error occurred',
-  });
-});
+app.use(
+  (
+    err: ErrorRequestHandler,
+    _req: Request,
+    res: Response,
+    _next: NextFunction
+  ) => {
+    console.error('[Express Error]', err);
+    res.status(500).json({
+      error: 'Internal Server Error',
+      message: err || 'Unexpected error occurred',
+    });
+  }
+);
 
 export default app; // ✅ Default export now
