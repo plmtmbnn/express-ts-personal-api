@@ -5,6 +5,8 @@ const envSchema = z.object({
   PORT: z.string().default('3000'),
   JWT_SECRET: z.string().min(32).max(100),
   REDIS_ENDPOINT: z.string(),
+  TRADE_API_BASE_URL: z.string(),
+  TRADE_API_TOKEN: z.string(),
 });
 
 const parsedEnv = envSchema.safeParse(process.env);
