@@ -1,5 +1,9 @@
-import { ENV_GLOBAL } from '../config';
+import redis from '@/libs/redis';
+import { supabaseAdmin } from '@/libs/supabase/supabase';
 import { http } from '../libs/http/http';
+
+const REDIS_TTL_SECONDS = 60 * 5; // 5 minutes
+const REDIS_KEY = 'app_token:esbe';
 
 export const fetchDataFromHeaven = async (
   baseUrl: string,
@@ -9,9 +13,10 @@ export const fetchDataFromHeaven = async (
   retryCount: number = 0
 ): Promise<any> => {
   try {
+    const esbeTokenBearer: string = await retrieveToken();
     const OrderTradeResponse: any = await http.get(`${baseUrl}${endpoint}`, {
       headers: {
-        Authorization: `Bearer ${ENV_GLOBAL.TRADE_API_TOKEN}`,
+        Authorization: `Bearer ${esbeTokenBearer}`,
       },
       query: query as any,
     });
@@ -51,4 +56,46 @@ export const fetchDataFromHeaven = async (
         'Unknown error occurred'
     );
   }
+};
+
+export const retrieveToken = async (): Promise<string> => {
+  // 1️⃣ Try Redis first
+  try {
+    const cachedToken = await redis.get(REDIS_KEY);
+
+    if (cachedToken) {
+      return cachedToken;
+    }
+  } catch (err) {
+    console.warn('[TOKEN] Redis read failed, fallback to Supabase', err);
+  }
+
+  // 2️⃣ Fetch from Supabase (source of truth)
+  const { data, error } = await supabaseAdmin
+    .from('app_tokens')
+    .select('token')
+    .eq('is_active', true)
+    .eq('name', 'esbe')
+    .single();
+
+  if (error) {
+    console.error('[TOKEN] Supabase query failed', error);
+    throw new Error('Failed to retrieve token from Supabase');
+  }
+
+  if (!data?.token) {
+    console.error('[TOKEN] Token not found or inactive');
+    throw new Error('Token not available');
+  }
+
+  const token = data.token;
+
+  // 3️⃣ Cache in Redis (best-effort)
+  try {
+    await redis.set(REDIS_KEY, token, 'EX', REDIS_TTL_SECONDS);
+  } catch (err) {
+    console.warn('[TOKEN] Redis write failed', err);
+  }
+
+  return token;
 };

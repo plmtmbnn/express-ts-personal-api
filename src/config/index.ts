@@ -6,7 +6,8 @@ const envSchema = z.object({
   JWT_SECRET: z.string().min(32).max(100),
   REDIS_ENDPOINT: z.string(),
   TRADE_API_BASE_URL: z.string(),
-  TRADE_API_TOKEN: z.string(),
+  SUPABASE_URL: z.string(),
+  SUPABASE_ANON_KEY: z.string(),
 });
 
 const parsedEnv = envSchema.safeParse(process.env);
