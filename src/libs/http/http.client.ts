@@ -1,7 +1,7 @@
-import { ofetch } from 'ofetch';
+import { type $fetch, ofetch } from 'ofetch';
 import { HttpClientError } from './http.error';
 
-export const client = ofetch.create({
+export const client: ReturnType<typeof $fetch.create> = ofetch.create({
   retry: 0,
 
   async onResponseError({ response }) {

@@ -1,6 +1,6 @@
 import { client } from './http.client';
 import { resolveHeaders } from './http.headers';
-import { type BaseOptions, HttpBody } from './http.types';
+import type { BaseOptions, HttpBody } from './http.types';
 
 const DEFAULT_TIMEOUT = 5000;
 
@@ -14,40 +14,44 @@ export const http = {
     });
   },
 
-  post<T, HttpBody>(
+  post<T, B extends HttpBody = HttpBody>(
     url: string,
-    body: Body,
+    body: B,
     options?: BaseOptions
   ): Promise<T> {
     return client<T>(url, {
       method: 'POST',
-      body,
+      body: body as any,
       query: options?.query,
-      headers: resolveHeaders(body, options?.headers),
+      headers: resolveHeaders(body as Record<string, any>, options?.headers),
       timeout: options?.timeoutMs ?? DEFAULT_TIMEOUT,
     });
   },
 
-  put<T, HttpBody>(url: string, body: Body, options?: BaseOptions): Promise<T> {
+  put<T, B extends HttpBody = HttpBody>(
+    url: string,
+    body: B,
+    options?: BaseOptions
+  ): Promise<T> {
     return client<T>(url, {
       method: 'PUT',
-      body,
+      body: body as any,
       query: options?.query,
-      headers: resolveHeaders(body, options?.headers),
+      headers: resolveHeaders(body as Record<string, any>, options?.headers),
       timeout: options?.timeoutMs ?? DEFAULT_TIMEOUT,
     });
   },
 
-  patch<T, HttpBody>(
+  patch<T, B extends HttpBody = HttpBody>(
     url: string,
-    body: Body,
+    body: B,
     options?: BaseOptions
   ): Promise<T> {
     return client<T>(url, {
       method: 'PATCH',
-      body,
+      body: body as any,
       query: options?.query,
-      headers: resolveHeaders(body, options?.headers),
+      headers: resolveHeaders(body as Record<string, any>, options?.headers),
       timeout: options?.timeoutMs ?? DEFAULT_TIMEOUT,
     });
   },

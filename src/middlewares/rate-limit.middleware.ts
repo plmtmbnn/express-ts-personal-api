@@ -10,7 +10,11 @@ export function rateLimit({
   limit: number;
   windowSec: number;
 }) {
-  return async (req: Request, res: Response, next: NextFunction) => {
+  return async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<any> => {
     const key = `${keyPrefix}:${req.ip}`;
 
     const count = await redis.incr(key);

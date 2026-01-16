@@ -4,7 +4,11 @@ import { ENV_GLOBAL } from '../config';
 
 const JWT_SECRET = ENV_GLOBAL.JWT_SECRET as string;
 
-function jwtAuthMiddleware(req: Request, res: Response, next: NextFunction) {
+function jwtAuthMiddleware(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void | any {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
