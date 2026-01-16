@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/plmtmbnn/express-ts-personal-api/compare/v1.5.0...v1.6.0) (2026-01-16)
+
+
+### Features
+
+* price historical API ([9a0f5a9](https://github.com/plmtmbnn/express-ts-personal-api/commit/9a0f5a9abe881e148d898ea2db9173fd9a3814a2))
+
 ## [1.5.0](https://github.com/plmtmbnn/express-ts-personal-api/compare/v1.4.1...v1.5.0) (2026-01-15)
 
 
