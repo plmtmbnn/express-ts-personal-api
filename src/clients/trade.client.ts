@@ -23,10 +23,16 @@ export const fetchDataFromHeaven = async (
 
     return OrderTradeResponse;
   } catch (error: any) {
-    const is502 =
+    const is502: boolean =
       error?.response?.status === 502 ||
       error?.statusCode === 502 ||
       error?.message?.includes('502');
+
+    const is401: boolean = String(error?.message).includes('Unauthorized');
+
+    if (is401) {
+      await redis.del(REDIS_KEY);
+    }
 
     if (is502 && retryCount < maxRetries) {
       const delay = 1000 * (retryCount + 1); // Exponential backoff
